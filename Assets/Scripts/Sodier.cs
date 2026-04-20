@@ -4,37 +4,54 @@ using UnityEngine;
 
 public class Sodier : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float time = 2f; 
-    private Collider2D col;
+    public float time = 5f; 
     private float resTimer = 3f;
     public Manager manager;
+
+    private bool isDone = false;
+
     void Start()
     {
         StartCoroutine(SelfDestruct());
-        col = GetComponent<Collider2D>();
         manager = GameObject.Find("GameManager").GetComponent<Manager>();
     }
 
     IEnumerator SelfDestruct()
     {
         yield return new WaitForSeconds(time);
-        Destroy(gameObject);
-        
-        manager.GetComponent<Manager>().soldierDie++;
+
+        if (!isDone)
+        {
+            isDone = true;
+            manager.soldierDie++;
+            Destroy(gameObject);
+        }
     }
 
-    void Update()
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (col.IsTouchingLayers(LayerMask.GetMask("Player")))
+        if (isDone) return;
+        Debug.Log("Saving... " + resTimer);
+
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Saved a soldier!");
             resTimer -= Time.deltaTime;
+
             if (resTimer <= 0f)
             {
+                isDone = true;
+                manager.soldierSave++;
+                Debug.Log("Saved!");
                 Destroy(gameObject);
-                manager.GetComponent<Manager>().soldierSave++;
             }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            resTimer = 3f; // reset if player leaves early
         }
     }
 }

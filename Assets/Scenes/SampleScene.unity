@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef4d2559e6ccdc4aba1e87e20213f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierPrefab: {fileID: 972624844907198602, guid: 0f4e9bacb3a67b248a43d8ffb5fa70f7, type: 3}
+  soldierPrefab: {fileID: 2236572149724091633, guid: 89a104ed16bcef94c9730f8951d393f1, type: 3}
   SpawnTimeRange: 3
   m_remainingSpawnTimer: 3
   soldierDie: 0
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 516011391}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

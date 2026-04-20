@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Script : MonoBehaviour
 {
     public Vector3 targetPosition;
+
     void Start()
     {
+        targetPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0f; // keep in 2D plane
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                targetPosition = hit.point;
-            }
+            targetPosition = mousePos;
         }
-		transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime);
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPosition,
+            Time.deltaTime * 5f
+        );
     }
 }
