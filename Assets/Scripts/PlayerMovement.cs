@@ -12,11 +12,16 @@ public class Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-		{
-			targetPosition = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));
-		}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPosition = hit.point;
+            }
+        }
 		transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime);
     }
 }
