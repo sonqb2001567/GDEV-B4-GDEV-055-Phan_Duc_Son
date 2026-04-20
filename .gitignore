@@ -1,0 +1,15 @@
+[Tt]emp/
+[Ll]ibrary/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# Visual Studio / VSCode
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.tmp
